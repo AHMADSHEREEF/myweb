@@ -1,0 +1,14 @@
+<?php
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$database = "ahmad_shereef";
+
+$connect = mysqli_connect($hostname, $username, $password, $database);
+
+#if(!$connect) {
+#        echo "Warning";
+#}else {
+#     echo "connected";
+#}
+?>

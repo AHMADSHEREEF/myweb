@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>image adding with price</title>
+        <style>
+        body {
+                margin: 0;
+                padding: 0;
+        }
+        .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: rgb(50, 173, 171);
+                font-size: 20px;
+                padding-left: 20px; 
+                padding-right: 20px;
+                font-weight: 700;
+                color: white;
+                padding-bottom: 10px;
+                padding-top: 10px;
+        }
+        .navbar1 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+        }
+
+        .login {
+                margin-right: 20px;
+        }
+
+        .navbar2 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+        }
+
+        .share {
+                margin-right: 20px;
+                margin-left: 20px;
+        }
+        </style>
+</head>
+<body>
+        <div class="navbar">
+                <div class="navbar2">
+                <a href="./products.php">دەستپێک</a>
+                <a href="./add.php" class="share">پارڤەکرن</a>
+                <a href="./users.php">بکارهێنەر</a>
+                   
+                </div>
+               <div class="navbar1">
+                <a href="./login.php" class="login">چوونا ژوور</a>
+                <a href="./register.php">خوتومارکرن</a>
+               </div>
+        </div>
+                
+        <?php
+        require_once('database.php');
+
+        if(isset($_POST['adding'])) {
+
+        $product_name = $_POST['product_name'];
+        $product_price = $_POST['product_price'];
+
+        $product_image = "image/";
+        $product_image = $product_image . basename($_FILES['product_image']['name']);
+        move_uploaded_file($_FILES['product_image']['tmp_name'], $product_image);
+
+        $sql = "INSERT INTO product (product_name, product_price, product_image) VALUES ('$product_name', '$product_price', '$product_image') ";
+        if(mysqli_query($connect, $sql) === TRUE) {
+                echo "<script>location.href= 'products.php'</script>";
+        } else {
+        echo "خەلەتیەک یا هەی";
+        }
+        }
+
+        ?>
+
+
+
+        <div class="container text-center"> 
+
+        <form enctype="multipart/form-data" method="POST" class="form-inline text-center">
+        <h1>زێدەکرن</h2>
+        <br>
+        <input name="product_name" class="form-control" size="80" placeholder="ناڤێ بەرهەمی...">
+        <br><br>
+        <input name="product_price" class="form-control" size="80" placeholder="بهایێ وێ...">
+        <br><br>
+        <input name="product_image" type="file" class="form-control" size="80" placeholder="وێنە...">
+        <br><br>
+        <input name="adding" type="submit" class="btn btn-danger" value="زێدەکرن">
+        </form>
+
+        </div>
+
+</body>
+</html>

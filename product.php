@@ -1,0 +1,44 @@
+<html>
+<head>
+  <title>بخێرهاتی بەرێز</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+
+
+<div class="container">    
+  <div class="row">
+
+<?php
+require_once('database.php');
+$id = $_GET['id'];
+$sql = "SELECT * FROM product WHERE id = $id";
+$anjam = mysqli_query($connect, $sql);
+while($product = mysqli_fetch_assoc($anjam)) {
+?>
+
+<img width="50%" src="<?php echo $product['product_image'];  ?>"/>
+<h2><?php echo $product['product_name'];  ?></h2>
+<br>
+<h2><?php echo $product['product_price'];  ?></h2>
+<button type="button" class="btn btn-danger">پەیوەندیێ ب مە بکە برێکا 07508378521</button>
+<br>
+<br>
+<br>
+
+
+<?php
+}
+?>
+
+
+
+
+
+</div>
+</div>
+
+</body>
+</html>
